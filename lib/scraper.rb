@@ -12,16 +12,18 @@ class Scraper
 
     main = doc.css('section.main .main__content .storytype__content article')
 
-    main.map do |element|
-      title = element.css('.headline.entry-title a')
-      name = title.text
-      url = title.attribute('href').value
+    main.map { |element| scrape_index_element(element) }
+  end
 
-      date = get_date_array(element)
-      summary = element.css('.excerpt.entry-summary p').text
+  def self.scrape_index_element(element)
+    title = element.css('.headline.entry-title a')
+    name = title.text
+    url = title.attribute('href').value
 
-      [name, summary, url, date]
-    end
+    date = get_date_array(element)
+    summary = element.css('.excerpt.entry-summary p').text
+
+    [name, summary, url, date]
   end
 
   def self.get_date_array(element)
