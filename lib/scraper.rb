@@ -6,19 +6,20 @@ class Scraper
   end
 
   def self.scrape_index_page
-    doc = fetch_doc('https://www.avclub.com/c/newswire')
+    base = 'https://www.avclub.com/c/newswire'
+    doc = fetch_doc(base)
 
     main = doc.css('section.main .main__content .storytype__content article')
 
-    main.each do |element|
+    main.map do |element|
       title = element.css('.headline.entry-title a')
       name = title.text
       url = title.attribute('href').value
 
-      date = get_date_array
+      date = get_date_array(element)
       summary = element.css('.excerpt.entry-summary p').text
 
-      Article.new(name, summary, url, date)
+      [name, summary, url, date]
     end
   end
 
