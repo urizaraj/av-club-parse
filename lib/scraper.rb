@@ -22,8 +22,9 @@ class Scraper
 
     date = get_date_array(element)
     summary = element.css('.excerpt.entry-summary p').text
+    tags = get_tag_array(element)
 
-    [name, summary, url, date]
+    [name, summary, url, date, tags]
   end
 
   def self.get_date_array(element)
@@ -36,5 +37,18 @@ class Scraper
     doc = fetch_doc(url)
     paragraphs = doc.css('.post-content.entry-content.js_entry-content p')
     paragraphs.map(&:text)
+  end
+
+  def self.get_tag_array(element)
+    # #taglist-1823034471 > div > ul > li:nth-child(2) > a
+    links = element.css(
+      'header .meta--pe .meta__container .post-tags-container .post-taglist a'
+    )
+
+    links.map do |link|
+      name = link.text
+      url_name = link.attribute('data-urlname').value
+      [name, url_name]
+    end
   end
 end
