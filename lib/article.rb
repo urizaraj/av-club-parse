@@ -1,6 +1,6 @@
 # Article name, summary, and URL
 class Article
-  attr_accessor :name, :summary, :url
+  attr_accessor :name, :summary, :url, :full_story
 
   @@all = []
 
@@ -19,7 +19,8 @@ class Article
   def self.display_all
     all.each do |article|
       puts article.name
-      puts article.summary
+      puts article.full_story ? article.full_story : article.summary
+      puts '---'
       puts
     end
   end
