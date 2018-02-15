@@ -3,7 +3,7 @@ class Article
   attr_accessor :name, :summary, :url, :full_story, :date
 
   def initialize(name, summary, url, date)
-    self.name = name
+    self.name = name.delete("\n")
     self.summary = summary
     self.url = url
     self.date = date
