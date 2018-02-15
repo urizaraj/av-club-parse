@@ -5,9 +5,10 @@ class Scraper
     Nokogiri::HTML(html)
   end
 
-  def self.scrape_index_page
-    base = 'https://www.avclub.com/c/newswire'
-    doc = fetch_doc(base)
+  def self.scrape_index_page(start_time = 0)
+    url = 'https://www.avclub.com/c/newswire'
+    url << "?startTime=#{start_time}" unless start_time.zero?
+    doc = fetch_doc(url)
 
     main = doc.css('section.main .main__content .storytype__content article')
 
@@ -31,9 +32,7 @@ class Scraper
 
   def self.scrape_article(url)
     doc = fetch_doc(url)
-
     paragraphs = doc.css('.post-content.entry-content.js_entry-content p')
-
     paragraphs.map(&:text)
   end
 end
