@@ -1,8 +1,7 @@
 # Scrapes AV Club newswire page
 class Scraper
   def self.scrape_index_page
-    html = open('https://www.avclub.com/c/newswire')
-    doc = Nokogiri::HTML(html)
+    doc = fetch_doc('https://www.avclub.com/c/newswire')
 
     main = doc.css('section.main .main__content .storytype__content article')
 
@@ -11,9 +10,18 @@ class Scraper
       name = title.text
       url = title.attribute('href').value
 
-      summary = element.css('.excerpt.entry-summary p')
+      summary = element.css('.excerpt.entry-summary p').text
 
       Article.new(name, summary, url)
     end
+  end
+
+  def self.fetch_doc(url)
+    html = open(url)
+    Nokogiri::HTML(html)
+  end
+
+  def self.scrape_article(url)
+    doc = fetch_doc(url)
   end
 end
