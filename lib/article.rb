@@ -10,7 +10,7 @@ class Article
   end
 
   def display
-    y, m, d, h, min, s = date
+    y, m, d, _h, _min, _s = date
     puts name
     puts "#{y} #{m} #{d}"
     puts full_story ? full_story : summary
