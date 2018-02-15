@@ -28,4 +28,9 @@ class AVParser
     start_time = (Time.local(*last_date).to_i + 60 - 3600) * 1000
     scrape_articles(start_time)
   end
+
+  def full_story(article)
+    full_story = Scraper.scrape_article(article.url)
+    article.full_story = full_story
+  end
 end
