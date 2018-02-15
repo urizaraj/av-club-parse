@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
 require_relative '../config.rb'
-require_relative '../lib/scraper.rb'
 
 Scraper.scrape_index_page
+Article.display_all
