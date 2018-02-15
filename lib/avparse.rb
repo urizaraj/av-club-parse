@@ -33,4 +33,10 @@ class AVParser
     full_story = Scraper.scrape_article(article.url)
     article.full_story = full_story
   end
+
+  def display_titles
+    all_articles.each_with_index do |article, index|
+      puts "[#{index}] #{article.name}"
+    end
+  end
 end
