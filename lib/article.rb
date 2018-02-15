@@ -1,3 +1,4 @@
+# Article name, summary, and URL
 class Article
   attr_accessor :name, :summary, :url
 
@@ -13,5 +14,13 @@ class Article
 
   def self.all
     @@all
+  end
+
+  def self.display_all
+    all.each do |article|
+      puts article.name
+      puts article.summary
+      puts
+    end
   end
 end
