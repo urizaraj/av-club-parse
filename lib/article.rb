@@ -11,17 +11,25 @@ class Article
   end
 
   def display
-    y, m, d, _h, _min, _s = date
     puts name
-    puts "#{m}/#{d}/#{y}"
-    tags.each { |tag| puts tag.url }
+    puts date_string
+    puts tags_string
+    puts
     puts full_story ? full_story : summary
-    puts '.....'
     puts
   end
 
   def add_tag(tag)
     tags << tag
     tag.add_article(self)
+  end
+
+  def tags_string
+    tags.map(&:url).join(' ')
+  end
+
+  def date_string
+    y, m, d, _h, _min, _s = date
+    "#{m}/#{d}/#{y}"
   end
 end
