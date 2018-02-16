@@ -77,4 +77,9 @@ class AVParser
     end
     puts
   end
+
+  def display_single_tag(tag_url)
+    selected_tag = all_tags.find { |tag| tag.url == tag_url }
+    selected_tag.display if selected_tag
+  end
 end
