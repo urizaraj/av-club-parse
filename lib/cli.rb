@@ -28,6 +28,11 @@ class AVParseCommandLine
         puts
       elsif input[0] == 'tags'
         avparser.display_tags
+      elsif input[0] == 'all'
+        print 'loading...'
+        avparser.full_story_all
+        print 'done'
+        puts
       else
         break
       end
