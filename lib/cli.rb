@@ -22,16 +22,18 @@ class AVParseCommandLine
       elsif input[0] == 'article'
         avparser.display_article(input[1].to_i)
       elsif input[0] == 'more'
-        print 'loading...'
+        print 'loading more articles... '
         avparser.more_articles
-        print 'done'
+        print 'done!'
+        puts
         puts
       elsif input[0] == 'tags'
         avparser.display_tags
       elsif input[0] == 'all'
-        print 'loading...'
+        print 'loading all articles... '
         avparser.full_story_all
-        print 'done'
+        print 'done!'
+        puts
         puts
       else
         break
