@@ -30,6 +30,7 @@ class AVParser
   end
 
   def full_story(article)
+    break if article.full_story
     full_story_array, tag_array = Scraper.scrape_article(article.url)
     update_tags(tag_array, article)
     article.full_story = full_story_array
@@ -65,7 +66,7 @@ class AVParser
 
   def display_article(i)
     article = all_articles[i]
-    full_story(article) unless article.full_story
+    full_story(article)
     article.display
   end
 
