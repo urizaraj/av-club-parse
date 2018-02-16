@@ -35,6 +35,8 @@ class AVParseCommandLine
         print 'done!'
         puts
         puts
+      elsif input[0] == 'tag'
+        avparser.display_single_tag(input[1])
       else
         break
       end
