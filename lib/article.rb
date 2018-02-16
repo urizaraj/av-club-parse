@@ -13,9 +13,10 @@ class Article
   def display
     y, m, d, _h, _min, _s = date
     puts name
-    puts "#{y} #{m} #{d}"
+    puts "#{m}/#{d}/#{y}"
+    tags.each { |tag| puts tag.url }
     puts full_story ? full_story : summary
-    puts '---'
+    puts '.....'
     puts
   end
 
