@@ -17,6 +17,7 @@ class Tag
   def display
     puts url
     puts
-    articles.each { |article| puts article.name }
+    articles.each { |article| puts "[#{article.id}] #{article.name}" }
+    puts
   end
 end
