@@ -13,14 +13,9 @@ class AVParser
   def scrape_articles(start_time = 0)
     article_info = Scraper.scrape_index_page(start_time)
 
-    article_info.each do |name, summary, url, date, tag_names|
-      article = Article.new(name, summary, url, date)
+    article_info.each do |info_array|
+      article = Article.new(*info_array)
       all_articles << article
-      tag_names.each do |tag_name, tag_url|
-        tag, isnew = find_or_create_tag(tag_name, tag_url)
-        all_tags << tag if isnew
-        article.add_tag(tag)
-      end
     end
   end
 
@@ -30,23 +25,39 @@ class AVParser
     scrape_articles(start_time)
   end
 
+  def full_story(article)
+    full_story, tag_array = Scraper.scrape_article(article.url)
+    update_tags(tag_array, article)
+    article.full_story = full_story
+  end
+
+  def update_tags(tag_names, article)
+    tag_names.each do |tag_name, tag_url|
+      tag, isnew = find_or_create_tag(tag_name, tag_url)
+      all_tags << tag if isnew
+      article.add_tag(tag)
+    end
+  end
+
   def find_or_create_tag(tag_name, tag_url)
     old_tag = all_tags.find { |tag| tag.name == tag_name }
     old_tag ? [old_tag, false] : [Tag.new(tag_name, tag_url), true]
-  end
-
-  def full_story(article)
-    full_story = Scraper.scrape_article(article.url)
-    article.full_story = full_story
   end
 
   def display_titles
     all_articles.each_with_index do |article, index|
       puts "[#{index}] #{article.name}"
     end
+    puts
   end
 
   def display_articles
     all_articles.each(&:display)
+  end
+
+  def display_article(i)
+    article = all_articles[i]
+    full_story(article)
+    article.display
   end
 end
