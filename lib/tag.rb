@@ -13,4 +13,10 @@ class Tag
     articles << article
     self.size += 1
   end
+
+  def display
+    puts url
+    puts
+    articles.each { |article| puts article.name }
+  end
 end
