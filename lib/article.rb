@@ -1,6 +1,6 @@
 # Article name, summary, and URL
 class Article
-  attr_accessor :name, :summary, :url, :full_story, :date, :tags
+  attr_accessor :name, :summary, :url, :full_story, :date, :tags, :id
 
   def initialize(name, summary, url, date)
     self.name = name.delete("\n")
