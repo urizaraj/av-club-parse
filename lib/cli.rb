@@ -9,16 +9,20 @@ class AVParseCommandLine
   def start
     avparser.start
     puts 'welcome to the av club newswire parser'
-    get_input
+    main_loop
   end
 
-  def get_input
+  def main_loop
     loop do
       input = gets.strip.split
       puts
-      avparser.display_titles if input[0] == 'display' && input[1] == 'titles'
-      avparser.display_article(input[2].to_i) if input[0] == 'display' && input[1] == 'article'
-      break if input.size.zero?
+      if input == %w[display titles]
+        avparser.display_titles
+      elsif input[0..1] == %w[display article]
+        avparser.display_article(input[2].to_i)
+      else
+        break
+      end
     end
   end
 end
