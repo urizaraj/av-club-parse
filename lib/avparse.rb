@@ -1,6 +1,6 @@
 # Main class to control scraper and articles
 class AVParser
-  attr_accessor :all_articles
+  attr_accessor :all_articles, :all_tags
 
   def initialize
     self.all_articles = []
@@ -13,9 +13,14 @@ class AVParser
   def scrape_articles(start_time = 0)
     article_info = Scraper.scrape_index_page(start_time)
 
-    article_info.each do |value|
-      article = Article.new(*value)
+    article_info.each do |name, summary, url, date, tag_names|
+      article = Article.new(name, summary, url, date)
       all_articles << article
+      tag_names.each do |tag_name, tag_url|
+        tag, isnew = find_or_create_tag(tag_name, tag_url)
+        all_tags << tag if isnew
+        article.add_tag(tag)
+      end
     end
   end
 
@@ -38,5 +43,10 @@ class AVParser
     all_articles.each_with_index do |article, index|
       puts "[#{index}] #{article.name}"
     end
+  end
+
+  def find_or_create_tag(tag_name, tag_url)
+    old_tag = all_tags.find { |tag| tag.name == tag_name }
+    old_tag ? [old_tag, false] : [Tag.new(tag_name, tag_url), true]
   end
 end
