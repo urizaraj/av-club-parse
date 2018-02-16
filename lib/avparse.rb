@@ -1,10 +1,11 @@
 # Main class to control scraper and articles
 class AVParser
-  attr_accessor :all_articles, :all_tags
+  attr_accessor :all_articles, :all_tags, :cur_id
 
   def initialize
     self.all_articles = []
     self.all_tags = []
+    self.cur_id = 0
   end
 
   def start
@@ -16,7 +17,9 @@ class AVParser
 
     article_info.each do |info_array|
       article = Article.new(*info_array)
+      article.id = cur_id
       all_articles << article
+      self.cur_id += 1
     end
   end
 
