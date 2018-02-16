@@ -9,6 +9,7 @@ class AVParseCommandLine
   def start
     avparser.start
     puts 'welcome to the av club newswire parser'
+    puts
     main_loop
   end
 
@@ -16,10 +17,17 @@ class AVParseCommandLine
     loop do
       input = gets.strip.split
       puts
-      if input == %w[display titles]
+      if input[0] == 'titles'
         avparser.display_titles
-      elsif input[0..1] == %w[display article]
-        avparser.display_article(input[2].to_i)
+      elsif input[0] == 'article'
+        avparser.display_article(input[1].to_i)
+      elsif input[0] == 'more'
+        print 'loading...'
+        avparser.more_articles
+        print 'done'
+        puts
+      elsif input[0] == 'tags'
+        avparser.display_tags
       else
         break
       end
