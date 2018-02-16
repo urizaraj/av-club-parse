@@ -61,4 +61,14 @@ class AVParser
     full_story(article)
     article.display
   end
+
+  def display_tags
+    n = 1
+    all_tags.each do |tag|
+      print " #{tag.url} "
+      puts if (n % 3).zero?
+      n += 1
+    end
+    puts
+  end
 end
