@@ -2,7 +2,6 @@
 
 require_relative '../config.rb'
 
-avparser = AVParser.new
+cli = AVParseCommandLine.new
 
-avparser.start
-avparser.display_articles
+cli.start
