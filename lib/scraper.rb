@@ -39,7 +39,7 @@ class Scraper
 
   def self.scrape_article(url)
     doc = fetch_doc(url)
-    paragraphs = doc.css('.post-content.entry-content.js_entry-content p')
+    paragraphs = doc.css('.post-content.entry-content.js_entry-content > p')
     tag_array = get_tag_array(doc)
 
     [paragraphs.map(&:text), tag_array]
