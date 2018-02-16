@@ -49,7 +49,7 @@ class AVParser
   end
 
   def find_or_create_tag(tag_name, tag_url)
-    old_tag = all_tags.find { |tag| tag.url == tag_url }
+    old_tag = find_tag(tag_url)
     old_tag ? [old_tag, false] : [Tag.new(tag_name, tag_url), true]
   end
 
@@ -83,7 +83,11 @@ class AVParser
   end
 
   def display_single_tag(tag_url)
-    selected_tag = all_tags.find { |tag| tag.url == tag_url }
+    selected_tag = find_tag(tag_url)
     selected_tag.display if selected_tag
+  end
+
+  def find_tag(tag_url)
+    all_tags.find { |tag| tag.url == tag_url }
   end
 end
