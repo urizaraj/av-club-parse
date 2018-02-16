@@ -32,6 +32,10 @@ class AVParser
     article.full_story = full_story_array
   end
 
+  def full_story_all
+    all_articles.each { |article| full_story(article) }
+  end
+
   def update_tags(tag_names, article)
     tag_names.each do |tag_name, tag_url|
       tag, isnew = find_or_create_tag(tag_name, tag_url)
@@ -41,7 +45,7 @@ class AVParser
   end
 
   def find_or_create_tag(tag_name, tag_url)
-    old_tag = all_tags.find { |tag| tag.name == tag_name }
+    old_tag = all_tags.find { |tag| tag.url == tag_url }
     old_tag ? [old_tag, false] : [Tag.new(tag_name, tag_url), true]
   end
 
@@ -64,8 +68,11 @@ class AVParser
 
   def display_tags
     n = 1
-    all_tags.each do |tag|
-      print " #{tag.url} "
+    all_tags
+      .sort_by(&:url)
+      .sort { |a, b| b.articles.size <=> a.articles.size }
+      .each do |tag|
+      print " #{tag.url} [#{tag.articles.size}] "
       puts if (n % 3).zero?
       n += 1
     end
