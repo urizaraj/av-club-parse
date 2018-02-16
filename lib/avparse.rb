@@ -69,8 +69,7 @@ class AVParser
   def display_tags
     n = 1
     all_tags
-      .sort_by(&:url)
-      .sort { |a, b| b.articles.size <=> a.articles.size }
+      .sort_by { |e| [e.size * -1, e.url] }
       .each do |tag|
       print " #{tag.url} [#{tag.articles.size}] "
       puts if (n % 3).zero?
