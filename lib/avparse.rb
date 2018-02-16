@@ -24,14 +24,15 @@ class AVParser
     end
   end
 
-  def display_articles
-    all_articles.each(&:display)
-  end
-
   def more_articles
     last_date = all_articles[-1].date
     start_time = (Time.local(*last_date).to_i + 60 - 3600) * 1000
     scrape_articles(start_time)
+  end
+
+  def find_or_create_tag(tag_name, tag_url)
+    old_tag = all_tags.find { |tag| tag.name == tag_name }
+    old_tag ? [old_tag, false] : [Tag.new(tag_name, tag_url), true]
   end
 
   def full_story(article)
@@ -45,8 +46,7 @@ class AVParser
     end
   end
 
-  def find_or_create_tag(tag_name, tag_url)
-    old_tag = all_tags.find { |tag| tag.name == tag_name }
-    old_tag ? [old_tag, false] : [Tag.new(tag_name, tag_url), true]
+  def display_articles
+    all_articles.each(&:display)
   end
 end
