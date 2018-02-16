@@ -27,9 +27,9 @@ class AVParser
   end
 
   def full_story(article)
-    full_story, tag_array = Scraper.scrape_article(article.url)
+    full_story_array, tag_array = Scraper.scrape_article(article.url)
     update_tags(tag_array, article)
-    article.full_story = full_story
+    article.full_story = full_story_array
   end
 
   def update_tags(tag_names, article)
@@ -58,7 +58,7 @@ class AVParser
 
   def display_article(i)
     article = all_articles[i]
-    full_story(article)
+    full_story(article) unless article.full_story
     article.display
   end
 
