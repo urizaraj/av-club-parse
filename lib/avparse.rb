@@ -4,6 +4,7 @@ class AVParser
 
   def initialize
     self.all_articles = []
+    self.all_tags = []
   end
 
   def start
