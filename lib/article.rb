@@ -12,6 +12,7 @@ class Article
 
   def display
     puts name
+    puts url
     puts date_string
     puts tags_string
     puts
