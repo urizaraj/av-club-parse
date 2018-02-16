@@ -37,7 +37,7 @@ class AVParseCommandLine
         puts
       elsif input[0] == 'tag'
         avparser.display_single_tag(input[1])
-      else
+      elsif input[0] == 'quit'
         break
       end
     end
