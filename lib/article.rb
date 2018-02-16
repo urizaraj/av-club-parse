@@ -2,13 +2,12 @@
 class Article
   attr_accessor :name, :summary, :url, :full_story, :date, :tags
 
-  def initialize(name, summary, url, date, tag_names)
+  def initialize(name, summary, url, date)
     self.name = name.delete("\n")
     self.summary = summary
     self.url = url
     self.date = date
     self.tags = []
-    add_tags(tag_names)
   end
 
   def display
@@ -20,10 +19,8 @@ class Article
     puts
   end
 
-  def add_tags(tag_names)
-    tag_names.each do |tag_name, tag_url|
-      tag = Tag.new(tag_name, tag_url, self)
-      tags << tag
-    end
+  def add_tag(tag)
+    tags << tag
+    tag.add_article(self)
   end
 end
