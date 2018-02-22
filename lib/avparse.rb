@@ -30,7 +30,7 @@ class AVParser
   end
 
   def full_story(article)
-    break if article.full_story
+    return if article.full_story
     full_story_array, tag_array = Scraper.scrape_article(article.url)
     update_tags(tag_array, article)
     article.full_story = full_story_array
