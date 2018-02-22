@@ -21,8 +21,7 @@ class AVParseCommandLine
         avparser.display_titles
       elsif input[0] == 'article'
         valid = avparser.display_article(input[1].to_i)
-        puts 'Invalid article' unless valid
-        puts
+        puts "Invalid article\n\n" unless valid
       elsif input[0] == 'more'
         print 'loading more articles... '
         avparser.more_articles
@@ -38,7 +37,8 @@ class AVParseCommandLine
         puts
         puts
       elsif input[0] == 'tag'
-        avparser.display_single_tag(input[1])
+        valid = avparser.display_single_tag(input[1])
+        puts "Invalid tag\n\n" unless valid
       elsif input[0] == 'quit'
         break
       end
