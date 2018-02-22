@@ -73,15 +73,15 @@ class AVParser
   end
 
   def display_tags
-    n = 1
+    n = 0
     all_tags
       .sort_by { |e| [e.size * -1, e.url] }
       .each do |tag|
-      print " #{tag.url} [#{tag.articles.size}] "
       puts if (n % 3).zero?
       n += 1
+      print " #{tag.url} [#{tag.articles.size}] "
     end
-    puts
+    puts "\n\n"
   end
 
   def display_single_tag(tag_url)
