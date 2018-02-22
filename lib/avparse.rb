@@ -86,7 +86,9 @@ class AVParser
 
   def display_single_tag(tag_url)
     selected_tag = find_tag(tag_url)
-    selected_tag.display if selected_tag
+    return false unless selected_tag
+    selected_tag.display
+    true
   end
 
   def find_tag(tag_url)
