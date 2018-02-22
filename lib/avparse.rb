@@ -65,9 +65,11 @@ class AVParser
   end
 
   def display_article(i)
+    return false if i + 1 > all_articles.size
     article = all_articles[i]
     full_story(article)
     article.display
+    true
   end
 
   def display_tags

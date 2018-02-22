@@ -20,7 +20,9 @@ class AVParseCommandLine
       if input[0] == 'titles'
         avparser.display_titles
       elsif input[0] == 'article'
-        avparser.display_article(input[1].to_i)
+        valid = avparser.display_article(input[1].to_i)
+        puts 'Invalid article' unless valid
+        puts
       elsif input[0] == 'more'
         print 'loading more articles... '
         avparser.more_articles
