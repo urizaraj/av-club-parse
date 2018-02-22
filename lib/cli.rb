@@ -1,9 +1,10 @@
 # class to interact with AVClubParser on command line
 class AVParseCommandLine
-  attr_accessor :avparser
+  attr_accessor :avparser, :complete
 
   def initialize
     self.avparser = AVParser.new
+    self.complete = false
   end
 
   def start
@@ -11,37 +12,35 @@ class AVParseCommandLine
     puts 'Welcome to the AV Club newswire parser!'
     puts 'Type "help" to see a list of commands.'
     puts
-    main_loop
+    main_loop until complete
   end
 
   def main_loop
-    loop do
-      command, arg = gets.strip.split
-      puts
-      if command == 'titles'
-        titles
+    command, arg = gets.strip.split
+    puts
+    if command == 'titles'
+      titles
 
-      elsif command == 'article'
-        article(arg.to_i)
+    elsif command == 'article'
+      article(arg.to_i)
 
-      elsif command == 'more'
-        more
+    elsif command == 'more'
+      more
 
-      elsif command == 'tags'
-        tags
+    elsif command == 'tags'
+      tags
 
-      elsif command == 'all'
-        all
+    elsif command == 'all'
+      all
 
-      elsif command == 'tag'
-        tag(arg)
+    elsif command == 'tag'
+      tag(arg)
 
-      elsif command == 'help'
-        help
+    elsif command == 'help'
+      help
 
-      elsif command == 'quit'
-        break
-      end
+    elsif command == 'quit'
+      self.complete = true
     end
   end
 
