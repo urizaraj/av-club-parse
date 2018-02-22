@@ -1,10 +1,22 @@
 # class to interact with AVClubParser on command line
 class AVParseCommandLine
-  attr_accessor :avparser, :complete
+  attr_accessor :avparser, :complete, :arg
+
+  COMMANDS = {
+    titles: :titles,
+    article: :article,
+    more: :more,
+    tags: :tags,
+    all: :all,
+    tag: :tag,
+    help: :help,
+    quit: :quit
+  }.freeze
 
   def initialize
     self.avparser = AVParser.new
     self.complete = false
+    self.arg = nil
   end
 
   def start
@@ -16,39 +28,21 @@ class AVParseCommandLine
   end
 
   def main_loop
-    command, arg = gets.strip.split
+    command, self.arg = gets.strip.split
     puts
-    if command == 'titles'
-      titles
 
-    elsif command == 'article'
-      article(arg.to_i)
+    return unless command
 
-    elsif command == 'more'
-      more
-
-    elsif command == 'tags'
-      tags
-
-    elsif command == 'all'
-      all
-
-    elsif command == 'tag'
-      tag(arg)
-
-    elsif command == 'help'
-      help
-
-    elsif command == 'quit'
-      self.complete = true
-    end
+    command = command.to_sym
+    send(COMMANDS[command]) if COMMANDS.key?(command)
   end
 
   def titles
     avparser.display_titles
   end
 
-  def article(i)
+  def article
+    i = arg.to_i
     valid = avparser.display_article(i)
     puts "Invalid article\n\n" unless valid
   end
@@ -73,8 +67,8 @@ class AVParseCommandLine
     puts
   end
 
-  def tag(i)
-    valid = avparser.display_single_tag(i)
+  def tag
+    valid = avparser.display_single_tag(arg)
     puts "Invalid tag\n\n" unless valid
   end
 
@@ -89,5 +83,9 @@ class AVParseCommandLine
     puts 'quit'
     puts 'help'
     puts
+  end
+
+  def quit
+    self.complete = true
   end
 end
