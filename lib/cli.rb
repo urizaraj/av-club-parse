@@ -8,7 +8,8 @@ class AVParseCommandLine
 
   def start
     avparser.start
-    puts 'welcome to the av club newswire parser'
+    puts 'Welcome to the AV Club newswire parser!'
+    puts 'Type "help" to see a list of commands.'
     puts
     main_loop
   end
