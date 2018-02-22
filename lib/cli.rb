@@ -16,30 +16,30 @@ class AVParseCommandLine
 
   def main_loop
     loop do
-      input = gets.strip.split
+      command, arg = gets.strip.split
       puts
-      if input[0] == 'titles'
+      if command == 'titles'
         titles
 
-      elsif input[0] == 'article'
-        article(input[1].to_i)
+      elsif command == 'article'
+        article(arg.to_i)
 
-      elsif input[0] == 'more'
+      elsif command == 'more'
         more
 
-      elsif input[0] == 'tags'
+      elsif command == 'tags'
         tags
 
-      elsif input[0] == 'all'
+      elsif command == 'all'
         all
 
-      elsif input[0] == 'tag'
-        tag(input[1])
+      elsif command == 'tag'
+        tag(arg)
 
-      elsif input[0] == 'help'
+      elsif command == 'help'
         help
 
-      elsif input[0] == 'quit'
+      elsif command == 'quit'
         break
       end
     end
