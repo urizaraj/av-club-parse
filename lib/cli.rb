@@ -1,5 +1,5 @@
 # class to interact with AVClubParser on command line
-class AVParseCommandLine
+class AVParserCommandLine
   attr_accessor :avparser, :complete, :arg
 
   COMMANDS = {
