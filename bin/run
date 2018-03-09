@@ -2,6 +2,4 @@
 
 require_relative '../config.rb'
 
-cli = AVParseCommandLine.new
-
-cli.start
+AVParseCommandLine.new.call
