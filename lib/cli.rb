@@ -43,8 +43,17 @@ class AVParseCommandLine
 
   def article
     i = arg.to_i
-    valid = avparser.display_article(i)
-    puts "Invalid article\n\n" unless valid
+    # valid = avparser.display_article(i)
+    # puts "Invalid article\n\n" unless valid
+    article = avparser.find_article(i)
+
+    puts article.name
+    puts article.url
+    puts article.date_string
+    puts article.tags_string
+    puts
+    puts article.full_story ? article.full_story : article.summary
+    puts
   end
 
   def more

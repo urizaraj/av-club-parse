@@ -72,6 +72,13 @@ class AVParser
     true
   end
 
+  def find_article(i)
+    return false if i + 1 > all_articles.size
+    article = all_articles[i]
+    full_story(article)
+    article
+  end
+
   def display_tags
     n = 0
     all_tags
