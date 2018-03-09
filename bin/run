@@ -2,4 +2,4 @@
 
 require_relative '../config.rb'
 
-AVParserCommandLine.new.call
+AVParserCommandLine.new.start
